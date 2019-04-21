@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  mongo:
+    image: mongo
+    ports:
+      - 127.0.0.1:27017:27017
+    volumes:
+      - /media/data/files/ml-runs:/data/db
+    networks:
+      - omniboard
+
+  omniboard:
+    image: vivekratnavel/omniboard:latest
+    command: ["--mu", "mongodb://mongo:27017/sacred?authSource=admin"]
+    ports:
+      - 127.0.0.1:9000:9000
+    depends_on:
+      - mongo
+    networks:
+      - omniboard
+
+networks:
+  omniboard:
