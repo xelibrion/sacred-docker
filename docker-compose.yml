@@ -10,6 +10,13 @@ services:
     networks:
       - omniboard
 
+  mongo-express:
+    image: mongo-express
+    ports:
+       - 127.0.0.1:9001:8081
+    networks:
+      - omniboard
+
   omniboard:
     image: vivekratnavel/omniboard:latest
     command: ["--mu", "mongodb://mongo:27017/sacred?authSource=admin"]
